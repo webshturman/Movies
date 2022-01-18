@@ -1,44 +1,40 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
-import {InputItem} from '../components/InputItem';
 import {ButtonItem} from '../components/ButtonItem';
 import {ButtonFull} from '../components/ButtonFull';
-import {InputPassword} from '../components/InputPassword';
-import {
-  onFacebookButtonPress,
-  onGoogleButtonPress,
-  toSignIn,
-} from '../firebase/functionsFireBase';
+import img from '../assets/images/images.png'
+import {onFacebookButtonPress, onGoogleButtonPress, toSignIn,} from '../firebase/functionsFireBase';
+import {AuthForm} from "../components/AuthForm";
+import nameIcon from "../assets/icons/name.png";
+import passIcon from "../assets/icons/pass.png";
 
 export const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
-  const img =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAtJcwEBl0U82p3TdGhiX9vvJ-eUpgqEAd1w&usqp=CAU';
+    const loginFields = [
+        {title:'Email', keyboardType:'email-address', secureTextEntry:false, value:email, setValue:setEmail, icon:nameIcon},
+        {title:'Password', secureTextEntry:true, value:password, setValue:setPassword, icon:passIcon},
+    ]
+    const toLogin = () => {
+        if(email && password){
+            setError(false)
+            toSignIn(email, password)
+        } else{
+            setError(true)
+        }
+    }
+
   return (
     <View style={styles.BlockLogin}>
       <View style={styles.blockImg}>
-        <Image style={styles.startImg} source={{uri: img}} />
+        <Image style={styles.startImg} source={img} />
       </View>
-      <Text style={styles.textPage}>Connect</Text>
-      <InputItem
-        placeholder={'Email'}
-        value={email}
-        setValue={setEmail}
-        keyboardType={'email-address'}
-        secureTextEntry={false}
-      />
-      <InputPassword
-        placeholder={'Password'}
-        value={password}
-        setValue={setPassword}
-        keyboardType={'default'}
-        secureTextEntry={true}
-      />
-      <ButtonFull text={'Sign In'} callback={() => toSignIn(email, password)} />
-      <ButtonItem text={'Sign in Facebook'} callback={onFacebookButtonPress} />
-      <ButtonItem text={'Sign in Google'} callback={onGoogleButtonPress} />
+        <AuthForm formData={loginFields} formName={'Connect'} error={error}/>
+      <ButtonFull text={'Sign In'} handleClick={toLogin} />
+      <ButtonItem text={'Sign in Facebook'} handleClick={onFacebookButtonPress} />
+      <ButtonItem text={'Sign in Google'} handleClick={onGoogleButtonPress} />
       <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
         <Text style={styles.registerText}>
           Dont have an account?Create here
@@ -49,14 +45,6 @@ export const SignInScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  textPage: {
-    marginTop: 10,
-    marginBottom: 10,
-    color: 'rgb(90,97,169)',
-    textAlign: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
   registerText: {
     marginTop: 30,
     color: 'rgb(90,97,169)',
@@ -72,6 +60,11 @@ const styles = StyleSheet.create({
     paddingLeft: '20%',
     marginTop: 10,
   },
+    textError: {
+        color: 'red',
+        marginBottom: 5,
+        textAlign: 'center',
+    },
   BlockLogin: {
     margin: '5%',
   },

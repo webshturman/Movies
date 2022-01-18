@@ -1,12 +1,4 @@
-import {
-  Alert,
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {setTitleForHeaderAC} from '../redux/app-reducer';

@@ -1,9 +1,9 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
-export const ButtonFull = ({text, callback}) => {
+export const ButtonFull = ({text, handleClick}) => {
   return (
-    <TouchableOpacity onPress={callback}>
+    <TouchableOpacity onPress={handleClick}>
       <View style={styles.button}>
         <View />
         <Text style={styles.textButton}>{text}</Text>

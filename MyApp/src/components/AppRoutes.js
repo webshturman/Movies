@@ -27,7 +27,6 @@ export const AppRoutes = () => {
     const [user, setUser] = useState();
 
     const toLogOut = () => {
-        console.log('Хочу выйти')
         auth()
             .signOut()
             .then(() => console.log('User signed out!'));
@@ -41,8 +40,6 @@ export const AppRoutes = () => {
     }
 
     useEffect(() => {
-        console.log('Инициализация')
-        console.log(user)
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
         return subscriber;
     }, []);
@@ -53,7 +50,7 @@ export const AppRoutes = () => {
 
     return (
         <>
-            <ButtonItem text={'Logout'} title={'logout'} callback={toLogOut}/>
+            <ButtonItem text={'Logout'} title={'logout'} handleClick={toLogOut}/>
             <NavigationContainer>
                 <Stack.Navigator>
                     {!user ? (

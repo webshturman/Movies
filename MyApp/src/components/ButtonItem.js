@@ -2,7 +2,7 @@ import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Icon} from 'react-native-elements';
 
-export const ButtonItem = ({text, callback}) => {
+export const ButtonItem = ({text, handleClick}) => {
   const styleButton =
     text === 'Sign in Facebook'
       ? {
@@ -18,7 +18,7 @@ export const ButtonItem = ({text, callback}) => {
           color: '#984a50',
         };
   return (
-    <TouchableOpacity onPress={callback}>
+    <TouchableOpacity onPress={handleClick}>
       <View style={styleButton.styles}>
         <View style={styles.ButtonIcon}>
           <Icon
