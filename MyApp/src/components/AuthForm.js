@@ -3,9 +3,18 @@ import {InputItem} from "./InputItem";
 import {StyleSheet, Text, View} from "react-native";
 
 export const AuthForm = ({formData, formName, error}) => {
+    const styleForm =
+        formName === 'Create an account'
+            ? {
+                styles: styles.accountCreate,
+
+            }
+            : {
+                styles: styles.textPage,
+            };
     return (
         <View>
-            <Text style={styles.textPage}>{formName}</Text>
+            <Text style={styleForm.styles}>{formName}</Text>
             {error && <Text style={styles.textError}>All fields must be filled in correctly</Text>}
             {formData.length > 0 && formData.map(({
                                                       title,
@@ -34,6 +43,14 @@ const styles = StyleSheet.create({
     textPage: {
         marginTop: 10,
         marginBottom: 10,
+        color: 'rgb(90,97,169)',
+        textAlign: 'center',
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+    accountCreate: {
+        marginTop: 10,
+        marginBottom: 70,
         color: 'rgb(90,97,169)',
         textAlign: 'center',
         fontSize: 24,

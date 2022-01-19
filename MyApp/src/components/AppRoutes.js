@@ -12,7 +12,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SearchInput} from './SearchInput';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
-import {ButtonItem} from "./ButtonItem";
 
 export const AppRoutes = () => {
     const Stack = createNativeStackNavigator();
@@ -25,12 +24,6 @@ export const AppRoutes = () => {
 
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
-
-    const toLogOut = () => {
-        auth()
-            .signOut()
-            .then(() => console.log('User signed out!'));
-    };
 
     function onAuthStateChanged(user) {
         setUser(user);
@@ -50,7 +43,6 @@ export const AppRoutes = () => {
 
     return (
         <>
-            <ButtonItem text={'Logout'} title={'logout'} handleClick={toLogOut}/>
             <NavigationContainer>
                 <Stack.Navigator>
                     {!user ? (

@@ -15,18 +15,27 @@ export const RegistrationScreen = () => {
     const [error, setError] = useState(false);
 
     const registrationFields = [
-        {title:'Name', secureTextEntry:false, value:name, setValue:setName, icon:nameIcon},
-        {title:'Email', keyboardType:'email-address', secureTextEntry:false, value:email, setValue:setEmail, icon:nameIcon},
-        {title:'Password', secureTextEntry:true, value:password, setValue:setPassword, icon:passIcon},
-        {title:'Confirm Password', secureTextEntry:true,
-            value:passwordConfirmation, setValue:setPasswordConfirmation, icon:passIcon},
+        {title: 'Name', secureTextEntry: false, value: name, setValue: setName, icon: nameIcon},
+        {
+            title: 'Email',
+            keyboardType: 'email-address',
+            secureTextEntry: false,
+            value: email,
+            setValue: setEmail,
+            icon: nameIcon
+        },
+        {title: 'Password', secureTextEntry: true, value: password, setValue: setPassword, icon: passIcon},
+        {
+            title: 'Confirm Password', secureTextEntry: true,
+            value: passwordConfirmation, setValue: setPasswordConfirmation, icon: passIcon
+        },
     ]
 
     const toSignUp = () => {
         if (name && email && password && passwordConfirmation) {
             setError(false)
             createUser(email, password)
-        } else{
+        } else {
             setError(true)
         }
     }

@@ -6,7 +6,7 @@ import {takeEvery} from 'redux-saga/effects';
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-  app: appReducer,
+    app: appReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -14,7 +14,7 @@ export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootWatcher);
 
 function* rootWatcher() {
-  yield takeEvery('APP/SET-FILMS-DATA', setFilmsWorkerSaga);
+    yield takeEvery('APP/SET-FILMS-DATA', setFilmsWorkerSaga);
 }
 
 window.store = store;
